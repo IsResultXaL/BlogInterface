@@ -1,5 +1,8 @@
 package com.caogen.blog.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InfoResult<T> {
 
     private int code;
