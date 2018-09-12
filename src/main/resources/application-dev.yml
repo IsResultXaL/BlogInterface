@@ -1,7 +1,7 @@
 server:
   port: 8081
 
-serverIp : 47.106.88.145
+serverIp : 127.0.0.1
 
 spring:
   redis:

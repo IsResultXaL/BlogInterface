@@ -2,7 +2,6 @@ spring:
   profiles:
     active: dev
 
-#¹«¹²ÅäÖÃ
 ip : 127.0.0.1
 
 mybatis:
