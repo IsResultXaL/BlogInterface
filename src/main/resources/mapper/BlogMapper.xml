@@ -6,6 +6,19 @@
 
     <select id="getBlog" resultType="com.caogen.blog.entity.Blog">
         SELECT * FROM k_blog
+        WHERE 1 = 1
+        <if test="blogType != null and blogType != ''">
+            AND blogType = #{blogType}
+        </if>
+        <if test="searchKey != null and searchKey != ''">
+            AND blogName LIKE CONCAT('%',#{searchKey},'%')
+        </if>
+        ORDER BY blogId DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="getBlogType" resultType="com.caogen.blog.entity.BlogType">
+        SELECT * FROM k_type ORDER BY typeId DESC
     </select>
 
 </mapper>

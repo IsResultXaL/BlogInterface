@@ -1,0 +1,23 @@
+server:
+  port: 8081
+
+serverIp : 127.0.0.1
+pageSize : 10
+
+spring:
+  redis:
+    host: ${serverIp}
+    port: 6379
+    password: master
+    database: 0
+    timeout: 60000
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://${serverIp}:3306/caogenBlog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: caogen
+
+logback:
+  logdir: /home/caogen/project/blog/logs/
+  appname: blog
