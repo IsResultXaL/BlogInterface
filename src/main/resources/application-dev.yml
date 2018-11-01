@@ -1,7 +1,7 @@
 server:
   port: 8081
 
-serverIp : 47.106.88.145
+serverIp : 127.0.0.1
 pageSize : 10
 
 spring:
@@ -19,5 +19,5 @@ spring:
     password: caogen
 
 logback:
-  logdir: D:/log/blog
+  logdir: /Users/kangcaogen/log/blog
   appname: blog
