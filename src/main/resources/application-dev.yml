@@ -18,6 +18,9 @@ spring:
     username: root
     password: caogen
 
+swagger:
+  enable: true
+
 logback:
   logdir: /Users/kangcaogen/log/blog
   appname: blog
