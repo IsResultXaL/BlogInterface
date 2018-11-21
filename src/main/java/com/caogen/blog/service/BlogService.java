@@ -10,6 +10,8 @@ public interface BlogService {
 
     List<Blog> getBlog(BlogCondition blogCondition);
 
+    Blog getBlog(String blogId);
+
     List<BlogType> getBlogType();
 
 }

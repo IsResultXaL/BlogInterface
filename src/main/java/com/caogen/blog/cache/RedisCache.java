@@ -105,7 +105,9 @@ public class RedisCache {
             }
 
             Blog blog = (Blog) redisTemplate.opsForHash().get(RedisKey.BLOGS, blogId);
-            blogList.add(blog);
+            if (blog != null) {
+                blogList.add(blog);
+            }
         }
 
         return blogList;

@@ -24,7 +24,7 @@ public class Blog {
 
     private String reprintedUrl;
 
-    public int getBlogId() {
+    public Integer getBlogId() {
         return blogId;
     }
 
@@ -72,7 +72,7 @@ public class Blog {
         this.time = time;
     }
 
-    public int getBrowse() {
+    public Integer getBrowse() {
         return browse;
     }
 
@@ -80,7 +80,7 @@ public class Blog {
         this.browse = browse;
     }
 
-    public int getPraise() {
+    public Integer getPraise() {
         return praise;
     }
 

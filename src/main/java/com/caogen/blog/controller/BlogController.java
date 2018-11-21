@@ -59,6 +59,26 @@ public class BlogController {
         return result;
     }
 
+    @ApiOperation(value = "通过博客ID获取博客")
+    @ApiImplicitParam(name = "blogId", value = "博客ID,默认为1", required = true, paramType = "path", dataType = "Long")
+    @GetMapping("/{blogId}")
+    public InfoResult getBlog(@PathVariable("blogId") long blogId) {
+        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        try {
+            Blog blog = blogService.getBlog(String.valueOf(blogId));
+            if (blog.getBlogId() != null) {
+                result = new InfoResult(HttpServletResponse.SC_OK);
+                result.setData(blog);
+            }
+        } catch (Exception e) {
+            result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            result.setMsg(ErrorFinal.ERROR);
+            logger.error("getBlog: " + e);
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     @ApiOperation(value = "获取所有博客类型")
     @GetMapping("/type")
     public InfoResult getBlogType() {

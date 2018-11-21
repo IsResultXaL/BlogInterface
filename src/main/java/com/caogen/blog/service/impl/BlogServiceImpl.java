@@ -6,6 +6,7 @@ import com.caogen.blog.dto.BlogCondition;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogType;
 import com.caogen.blog.service.BlogService;
+import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> getBlog(BlogCondition blogCondition) {
-
         if (blogCondition.getPageSize() <= 0) {
             blogCondition.setPageSize(pageSize);
         }
@@ -38,6 +38,23 @@ public class BlogServiceImpl implements BlogService {
 
         List<Blog> blogList = redisCache.getBlog(blogIds);
         return blogList;
+    }
+
+    @Override
+    public Blog getBlog(String blogId) {
+        Blog blog = new Blog();
+        if (Strings.isNullOrEmpty(blogId)) {
+            return blog;
+        }
+
+        List<Blog> blogList = redisCache.getBlog(blogId);
+        if (CollectionUtils.isEmpty(blogList)) {
+            return blog;
+        }
+
+        blog = blogList.get(0);
+
+        return blog;
     }
 
     @Override
