@@ -1,5 +1,6 @@
 package com.caogen.blog.dao;
 
+import com.caogen.blog.dto.BlogCondition;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogType;
 import org.apache.ibatis.annotations.Param;
@@ -10,11 +11,12 @@ import java.util.List;
 @Repository
 public interface BlogDao {
 
-    List<Blog> getBlog(@Param("blogType") String blogType,
-                       @Param("searchKey") String searchKey,
-                       @Param("offset") int offset,
-                       @Param("pageSize") int pageSize);
+    String[] getBlogId(BlogCondition blogCondition);
 
     List<BlogType> getBlogType();
+
+    List<Blog> getBlog();
+
+    Blog getBlogById(@Param("blogId") String blogId);
 
 }

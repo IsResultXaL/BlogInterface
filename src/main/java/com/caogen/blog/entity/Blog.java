@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Blog {
 
-    private int blogId;
+    private Integer blogId;
 
     private String blogName;
 
@@ -16,9 +16,9 @@ public class Blog {
 
     private Date time;
 
-    private int browse;
+    private Integer browse;
 
-    private int praise;
+    private Integer praise;
 
     private String blogType;
 
@@ -28,7 +28,7 @@ public class Blog {
         return blogId;
     }
 
-    public void setBlogId(int blogId) {
+    public void setBlogId(Integer blogId) {
         this.blogId = blogId;
     }
 
@@ -76,7 +76,7 @@ public class Blog {
         return browse;
     }
 
-    public void setBrowse(int browse) {
+    public void setBrowse(Integer browse) {
         this.browse = browse;
     }
 
@@ -84,7 +84,7 @@ public class Blog {
         return praise;
     }
 
-    public void setPraise(int praise) {
+    public void setPraise(Integer praise) {
         this.praise = praise;
     }
 

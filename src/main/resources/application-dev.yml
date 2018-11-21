@@ -8,7 +8,7 @@ spring:
   redis:
     host: ${serverIp}
     port: 6379
-    password: master
+    password: caogen
     database: 0
     timeout: 60000
   datasource:

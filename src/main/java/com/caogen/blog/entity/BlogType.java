@@ -2,7 +2,7 @@ package com.caogen.blog.entity;
 
 public class BlogType {
 
-    private int typeId;
+    private Integer typeId;
 
     private String typeName;
 
@@ -10,7 +10,7 @@ public class BlogType {
         return typeId;
     }
 
-    public void setTypeId(int typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 

@@ -1,12 +1,15 @@
 package com.caogen.blog.service.impl;
 
+import com.caogen.blog.cache.RedisCache;
 import com.caogen.blog.dao.BlogDao;
+import com.caogen.blog.dto.BlogCondition;
 import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogType;
 import com.caogen.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -16,17 +19,36 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     BlogDao blogDao;
 
+    @Autowired
+    RedisCache redisCache;
+
     @Value("${pageSize}")
     private int pageSize;
 
     @Override
-    public List<Blog> getBlog(int currentPage, String blogType, String searchKey) {
-        int offset = (currentPage - 1) * pageSize;
-        return blogDao.getBlog(blogType, searchKey, offset, pageSize);
+    public List<Blog> getBlog(BlogCondition blogCondition) {
+
+        if (blogCondition.getPageSize() <= 0) {
+            blogCondition.setPageSize(pageSize);
+        }
+
+        int offset = (blogCondition.getCurrentPage() - 1) * blogCondition.getPageSize();
+        blogCondition.setOffset(offset);
+        String[] blogIds = blogDao.getBlogId(blogCondition);
+
+        List<Blog> blogList = redisCache.getBlog(blogIds);
+        return blogList;
     }
 
     @Override
     public List<BlogType> getBlogType() {
-        return blogDao.getBlogType();
+        List<BlogType> blogTypeList = redisCache.getBlogType();
+
+        if (CollectionUtils.isEmpty(blogTypeList)) {
+            redisCache.updateBlogType();
+            blogTypeList = redisCache.getBlogType();
+        }
+
+        return blogTypeList;
     }
 }

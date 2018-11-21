@@ -4,8 +4,8 @@
 
 <mapper namespace="com.caogen.blog.dao.BlogDao">
 
-    <select id="getBlog" resultType="com.caogen.blog.entity.Blog">
-        SELECT * FROM k_blog
+    <select id="getBlogId" resultType="java.lang.String">
+        SELECT blogId FROM k_blog
         WHERE 1 = 1
         <if test="blogType != null and blogType != ''">
             AND blogType = #{blogType}
@@ -19,6 +19,14 @@
 
     <select id="getBlogType" resultType="com.caogen.blog.entity.BlogType">
         SELECT * FROM k_type ORDER BY typeId DESC
+    </select>
+
+    <select id="getBlog" resultType="com.caogen.blog.entity.Blog">
+        SELECT * FROM k_blog ORDER BY blogId DESC
+    </select>
+
+    <select id="getBlogById" resultType="com.caogen.blog.entity.Blog">
+        SELECT * FROM k_blog WHERE blogId = #{blogId}
     </select>
 
 </mapper>
