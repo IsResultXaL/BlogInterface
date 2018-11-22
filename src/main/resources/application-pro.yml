@@ -23,4 +23,5 @@ swagger:
 
 logback:
   logdir: /home/caogen/project/blog/logs/
+  maxHistory: 30
   appname: blog

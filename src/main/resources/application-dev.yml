@@ -23,4 +23,5 @@ swagger:
 
 logback:
   logdir: /Users/kangcaogen/log/blog
+  maxHistory: 1
   appname: blog
