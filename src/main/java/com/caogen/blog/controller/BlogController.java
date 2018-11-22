@@ -1,5 +1,6 @@
 package com.caogen.blog.controller;
 
+import com.caogen.blog.annotation.LogInfoAnno;
 import com.caogen.blog.dto.BlogCondition;
 import com.caogen.blog.dto.InfoResult;
 import com.caogen.blog.entity.Blog;
@@ -34,6 +35,7 @@ public class BlogController {
     @Autowired
     BlogService blogService;
 
+    @LogInfoAnno("获取所有博客")
     @ApiOperation(value = "获取所有博客", notes = "查询分页数据")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "currentPage", value = "页码,默认为1", required = true, paramType = "query", dataType = "Long"),
@@ -59,6 +61,7 @@ public class BlogController {
         return result;
     }
 
+    @LogInfoAnno("通过博客ID获取博客")
     @ApiOperation(value = "通过博客ID获取博客")
     @ApiImplicitParam(name = "blogId", value = "博客ID,默认为1", required = true, paramType = "path", dataType = "Long")
     @GetMapping("/{blogId}")
@@ -79,6 +82,7 @@ public class BlogController {
         return result;
     }
 
+    @LogInfoAnno("获取所有博客类型")
     @ApiOperation(value = "获取所有博客类型")
     @GetMapping("/type")
     public InfoResult getBlogType() {
