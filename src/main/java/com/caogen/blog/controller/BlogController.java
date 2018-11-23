@@ -38,8 +38,8 @@ public class BlogController {
     @LogInfoAnno("获取所有博客")
     @ApiOperation(value = "获取所有博客", notes = "查询分页数据")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "currentPage", value = "页码,默认为1", required = true, paramType = "query", dataType = "Long"),
-            @ApiImplicitParam(name = "pageSize", value = "返回数据量", required = false, paramType = "query", dataType = "Long"),
+            @ApiImplicitParam(name = "currentPage", value = "页码,默认为1", required = true, paramType = "query", dataType = "Long", example = "1"),
+            @ApiImplicitParam(name = "pageSize", value = "返回数据量", required = false, paramType = "query", dataType = "Long", example = "10"),
             @ApiImplicitParam(name = "blogType", value = "博客类型", required = false, paramType = "query"),
             @ApiImplicitParam(name = "searchKey", value = "关键字搜索", required = false, paramType = "query")
     })
@@ -63,7 +63,7 @@ public class BlogController {
 
     @LogInfoAnno("通过博客ID获取博客")
     @ApiOperation(value = "通过博客ID获取博客")
-    @ApiImplicitParam(name = "blogId", value = "博客ID,默认为1", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(name = "blogId", value = "博客ID,默认为1", required = true, paramType = "path", dataType = "Long", example = "1")
     @GetMapping("/{blogId}")
     public InfoResult getBlog(@PathVariable("blogId") long blogId) {
         InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);

@@ -1,4 +1,4 @@
-package com.caogen.blog;
+package com.caogen.blog.config;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
