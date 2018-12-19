@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.caogen.blog.dao.UserDao">
+
+    <resultMap id="User" type="com.caogen.blog.entity.User">
+        <id column="id" property="id"/>
+        <result column="userName" property="userName"/>
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <resultMap id="UserRoles" type="com.caogen.blog.entity.User" extends="User">
+        <collection property="roles" ofType="java.lang.String">
+            <result column="role" property="role"/>
+        </collection>
+    </resultMap>
+
+    <select id="getUserByUserName" resultMap="UserRoles">
+      SELECT ku.id, ku.userName, ku.password, kr.role FROM k_user ku
+      INNER JOIN k_user_role kur ON ku.id = kur.userId
+      INNER JOIN k_role kr ON kur.roleId = kr.id
+      WHERE ku.userName = #{userName}
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id" parameterType="com.caogen.blog.entity.User">
+      INSERT INTO k_user (userName, password) VALUE (#{userName}, #{password})
+    </insert>
+
+</mapper>

@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -49,8 +50,7 @@ public class BlogController {
         try {
             List<Blog> blogList = blogService.getBlog(blogCondition);
             if (!CollectionUtils.isEmpty(blogList)) {
-                result = new InfoResult(HttpServletResponse.SC_OK);
-                result.setData(blogList);
+                result = new InfoResult(HttpServletResponse.SC_OK).setData(blogList);
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -70,8 +70,7 @@ public class BlogController {
         try {
             Blog blog = blogService.getBlog(String.valueOf(blogId));
             if (blog.getBlogId() != null) {
-                result = new InfoResult(HttpServletResponse.SC_OK);
-                result.setData(blog);
+                result = new InfoResult(HttpServletResponse.SC_OK).setData(blog);
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -90,8 +89,7 @@ public class BlogController {
         try {
             List<BlogType> typeList = blogService.getBlogType();
             if (typeList != null && !typeList.isEmpty()) {
-                result = new InfoResult(HttpServletResponse.SC_OK);
-                result.setData(typeList);
+                result = new InfoResult(HttpServletResponse.SC_OK).setData(typeList);
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

@@ -18,6 +18,12 @@ spring:
     username: root
     password: caogen
 
+jwt:
+  header: Authorization
+  tokenHead: Bearer
+  secret: $&*2Fn41KZE1maJ3
+  expiration: 3600
+
 swagger:
   enable: true
 
