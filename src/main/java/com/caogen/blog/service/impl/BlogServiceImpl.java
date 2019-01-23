@@ -33,6 +33,9 @@ public class BlogServiceImpl implements BlogService {
         }
 
         int offset = (blogCondition.getCurrentPage() - 1) * blogCondition.getPageSize();
+        if (offset < 0) {
+            offset = 0;
+        }
         blogCondition.setOffset(offset);
         String[] blogIds = blogDao.getBlogId(blogCondition);
 
