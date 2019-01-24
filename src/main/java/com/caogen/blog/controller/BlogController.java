@@ -7,6 +7,7 @@ import com.caogen.blog.entity.Blog;
 import com.caogen.blog.entity.BlogType;
 import com.caogen.blog.finals.ErrorFinal;
 import com.caogen.blog.service.BlogService;
+import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -45,11 +46,13 @@ public class BlogController {
     })
     @GetMapping
     public InfoResult getBlog(BlogCondition blogCondition) {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             List<Blog> blogList = blogService.getBlog(blogCondition);
             if (!CollectionUtils.isEmpty(blogList)) {
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(blogList);
+                result.setData(blogList);
+            } else {
+                result.setData(Lists.newArrayListWithCapacity(0));
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -65,11 +68,13 @@ public class BlogController {
     @ApiImplicitParam(name = "blogId", value = "博客ID,默认为1", required = true, paramType = "path", dataType = "Long", example = "1")
     @GetMapping("/{blogId}")
     public InfoResult getBlog(@PathVariable("blogId") long blogId) {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             Blog blog = blogService.getBlog(String.valueOf(blogId));
             if (blog.getBlogId() != null) {
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(blog);
+                result.setData(blog);
+            } else {
+                result.setData(Lists.newArrayListWithCapacity(0));
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -84,11 +89,13 @@ public class BlogController {
     @ApiOperation(value = "获取所有博客类型")
     @GetMapping("/type")
     public InfoResult getBlogType() {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             List<BlogType> typeList = blogService.getBlogType();
             if (typeList != null && !typeList.isEmpty()) {
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(typeList);
+                result.setData(typeList);
+            } else {
+                result.setData(Lists.newArrayListWithCapacity(0));
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

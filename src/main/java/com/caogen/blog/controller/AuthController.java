@@ -38,11 +38,11 @@ public class AuthController {
     @ApiOperation(value = "登录获取token", notes = "登录成功之后返回token")
     public InfoResult createAuthenticationToken(
             @RequestBody User user) {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             if (!Strings.isNullOrEmpty(user.getUserName()) && !Strings.isNullOrEmpty(user.getPassword())) {
                 String token = authService.login(user.getUserName(), user.getPassword());
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(token);
+                result.setData(token);
             }
         } catch (AuthenticationException e) {
             result = new InfoResult(HttpServletResponse.SC_BAD_REQUEST);
@@ -71,12 +71,12 @@ public class AuthController {
     @ApiOperation(value = "刷新token", notes = "通过oldToken刷新生成newToken")
     public InfoResult refreshAndGetAuthenticationToken(
             HttpServletRequest request) {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             String token = request.getHeader(tokenHeader);
             String refreshedToken = authService.refresh(token);
             if (!Strings.isNullOrEmpty(refreshedToken)) {
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(refreshedToken);
+                result.setData(refreshedToken);
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -91,11 +91,11 @@ public class AuthController {
     @LogInfoAnno("用户注册")
     @ApiOperation(value = "用户注册")
     public InfoResult register(@RequestBody User user) {
-        InfoResult result = new InfoResult(HttpServletResponse.SC_NO_CONTENT);
+        InfoResult result = new InfoResult(HttpServletResponse.SC_OK);
         try {
             user = authService.register(user);
             if (user != null && user.getId() != null) {
-                result = new InfoResult(HttpServletResponse.SC_OK).setData(user);
+                result.setData(user);
             }
         } catch (Exception e) {
             result = new InfoResult(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
