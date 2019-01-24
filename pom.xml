@@ -124,10 +124,10 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<configuration>
 					<imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-					<dockerDirectory>src/main/docker</dockerDirectory>
+					<dockerDirectory>${basedir}/</dockerDirectory>
 					<resources>
 						<resource>
-							<targetPath>${basedir}/target</targetPath>
+							<targetPath>/</targetPath>
 							<directory>${project.build.directory}</directory>
 							<include>${project.build.finalName}.jar</include>
 						</resource>
