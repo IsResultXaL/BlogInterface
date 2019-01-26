@@ -106,4 +106,9 @@ public class BlogController {
         return result;
     }
 
+    @GetMapping("/test")
+    public String test(){
+        return "Hello";
+    }
+
 }
